@@ -1,13 +1,14 @@
-let { chromium } = require("playwright");
-const assert = require("assert");
+let assert = require( 'assert' );
+const { chromium } = require( 'playwright' );
 
-(async () => {
-	const browser = await chromium.launch({ headless: false });
-	
-	const page = await browser.newPage();
-	await page.goto("https://www.wikipedia.org/");
+( async () => {
+	let browser, page;
+	browser = await chromium.launch( { headless: false } );
 
-	const text = await page.innerText(".localized-slogan");
-	assert(text === "The Free Encyclopedia");
+	page = await browser.newPage();
+	await page.goto( 'https://www.wikipedia.org/' );
+
+	const text = await page.innerText( '.localized-slogan' );
+	assert( text === 'The Free Encyclopedia' );
 	await browser.close();
-})();
+} )();
