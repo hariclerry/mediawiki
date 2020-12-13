@@ -11,7 +11,8 @@
     "postdoc": "grunt copy:jsduck",
     "selenium": "bash ./tests/selenium/selenium.sh",
     "selenium-daily": "MW_SCRIPT_PATH=/w npm run selenium-test -- --mochaOpts.grep @daily",
-    "selenium-test": "wdio ./tests/selenium/wdio.conf.js"
+    "selenium-test": "wdio ./tests/selenium/wdio.conf.js",
+    "jest-test": "jest -c ./tests/playwright/jest.e2e.config.js"
   },
   "devDependencies": {
     "@wdio/cli": "6.1.12",
@@ -25,6 +26,7 @@
     "api-testing": "1.3.0",
     "dotenv": "8.2.0",
     "eslint-config-wikimedia": "0.17.0",
+    "eslint-plugin-jest": "24.1.3",
     "grunt": "1.3.0",
     "grunt-banana-checker": "0.9.0",
     "grunt-contrib-copy": "1.0.0",
@@ -33,11 +35,14 @@
     "grunt-karma": "4.0.0",
     "grunt-stylelint": "0.16.0",
     "grunt-svgmin": "5.0.0",
+    "jest": "26.6.3",
+    "jest-playwright-preset": "1.4.2",
     "karma": "5.0.4",
     "karma-chrome-launcher": "3.1.0",
     "karma-firefox-launcher": "1.3.0",
     "karma-mocha-reporter": "2.2.5",
     "karma-qunit": "4.1.0",
+    "playwright": "1.6.2",
     "postcss-less": "2.0.0",
     "qunit": "2.10.0",
     "stylelint-config-wikimedia": "0.10.3",

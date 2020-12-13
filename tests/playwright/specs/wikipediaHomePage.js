@@ -1,14 +1,25 @@
-const assert = require( 'assert' );
 const { chromium } = require( 'playwright' );
 
-( async () => {
-	let browser, page;
-	browser = await chromium.launch( { headless: false } );
+describe( 'Wikipedia Home Page', () => {
+	let response, browser, page;
 
-	page = await browser.newPage();
-	await page.goto( 'https://www.wikipedia.org/' );
+	beforeAll( async () => {
+		browser = await chromium.launch();
+		page = await browser.newPage();
+		response = await page.goto( 'https://www.wikipedia.org/' );
+	} );
 
-	const text = await page.innerText( '.localized-slogan' );
-	assert( text === 'The Free Encyclopedia' );
-	await browser.close();
-} )();
+	afterAll( async () => {
+		await browser.close();
+	} );
+
+	it( 'test if page loads successfully', async () => {
+		expect( response.status() ).toBe( 200 );
+	} );
+
+	it( 'should check if page sub title is correct', async () => {
+
+		const subTitleText = await page.innerText( '.localized-slogan' );
+		expect( subTitleText ).toEqual( 'The Free Encyclopedia' );
+	} );
+} );
