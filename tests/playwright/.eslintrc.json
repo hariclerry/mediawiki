@@ -1,6 +1,6 @@
 {
 	"root": true,
-	"extends": ["../../.eslintrc.json", "plugin:jest/recommended"],
+	"extends": ["../../.eslintrc.json", "plugin:jest/recommended", "plugin:jest-playwright/recommended"],
 	"env": {
 		"node": true,
 		"es6": true,
