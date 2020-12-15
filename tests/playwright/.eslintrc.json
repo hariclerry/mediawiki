@@ -1,0 +1,13 @@
+{
+	"root": true,
+	"extends": ["../../.eslintrc.json", "plugin:jest/recommended", "plugin:jest-playwright/recommended"],
+	"env": {
+		"node": true,
+		"es6": true,
+		"jest/globals": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 8
+	},
+	"plugins": ["jest"]
+}
