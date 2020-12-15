@@ -12,7 +12,6 @@
     "selenium": "bash ./tests/selenium/selenium.sh",
     "selenium-daily": "MW_SCRIPT_PATH=/w npm run selenium-test -- --mochaOpts.grep @daily",
     "selenium-test": "wdio ./tests/selenium/wdio.conf.js",
-    "jest-test": "jest -c ./tests/playwright/jest.e2e.config.js",
     "playwright:open": "HEADLESS='false' jest -c ./tests/playwright/jest.e2e.config.js",
     "playwright:silent": "jest -c ./tests/playwright/jest.e2e.config.js"
   },

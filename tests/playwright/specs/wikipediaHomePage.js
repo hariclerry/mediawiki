@@ -8,7 +8,6 @@ describe( 'Page', () => {
 	} );
 
 	it( 'should display sub title correctly', async () => {
-
 		const subTitleText = await page.innerText( '.localized-slogan' );
 		expect( subTitleText ).toEqual( 'The Free Encyclopedia' );
 	} );

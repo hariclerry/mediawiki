@@ -1,9 +1,12 @@
-# playwright tests
+# PLAYWRIGHT TESTS
+## Usage
+There are three supported modes of running the tests.
+#### Headless
+The Playwright tests default to headless mode, unless a `HEADLESS` environment variable is set to false.To run headless;
 
-## Getting started
+    ```npm run playwright:silent```
+#### Visible browser
+To see the browser window;
 
-- Run `npm ci`
-- Run `node tests/playwright/specs/wikipediaHomePage.js` from the app root directory
-
-### Run test with Jest
-- Run `npm run jest-test`
+    ```npm run playwright:open```
+#### Video recording
