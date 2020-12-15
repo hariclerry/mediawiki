@@ -1,4 +1,11 @@
 # PLAYWRIGHT TESTS
+
+## Browsers
+By default Playwright runs in chromium browser. To run the tests in Firefox or Webkit browsers, set the environment variable to the browser of your choice;
+
+    DISPLAY=firefox 
+Or;
+    DISPLAY=webkit
 ## Usage
 There are three supported modes of running the tests.
 #### Headless
