@@ -24,7 +24,6 @@ describe( 'Page', () => {
 	} );
 
 	afterAll( async () => {
-
 		await browser.close();
 	} );
 
