@@ -1,4 +1,6 @@
 const { saveVideo } = require( 'playwright-video' );
+const path = require( 'path' ),
+	LOGPATH = process.env.LOG_DIR || path.join( __dirname, '..', 'log' );
 
 let capture;
 
@@ -10,10 +12,10 @@ describe( 'Page', () => {
 	beforeEach( async () => {
 		capture = await saveVideo(
 			page,
-			'./tests/playwright/videos/recording.mp4'
+			`${LOGPATH}/recording.mp4`
 		);
 		await page.screenshot( {
-			path: './tests/playwright/screenshots/screenshot.png'
+			path: `${LOGPATH}/screenshot.png`
 		} );
 	} );
 
