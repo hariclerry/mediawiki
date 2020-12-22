@@ -35,5 +35,5 @@ jobs:
             - uses: actions/upload-artifact@v2
               with:
                 name: playwright-artifact
-                path: src/log
+                path: /tests/playwright/
                 retention-days: 5
