@@ -32,3 +32,8 @@ jobs:
             - name: "Run playwright tests"
               run: |
                   npm run playwright:silent
+            - uses: actions/upload-artifact@v2
+              with:
+                name: playwright-artifact
+                path: src/log
+                retention-days: 5
