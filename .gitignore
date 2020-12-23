@@ -57,6 +57,7 @@ node_modules/
 /tests/phpunit/.phpunit.result.cache
 phpunit.xml
 /tests/selenium/log
+/tests/playwright/log
 .eslintcache
 .api-testing.config.json
 .phan/local-config.php
