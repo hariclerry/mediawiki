@@ -10,8 +10,28 @@ on:
         branches: [master]
 
 jobs:
-    test:
+    vector_skin:
         runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: "Clone vector skin repository"
+              run: |
+                  git clone "https://gerrit.wikimedia.org/r/mediawiki/skins/Vector" skins/Vector
+            - name: "Add vector skin config to LocalSettings.php file"
+              run: |
+                  echo "wfLoadSkin( 'Vector' );" >> LocalSettings.php
+
+    test:
+        env:
+            MW_DOCKER_PORT: 8080
+            MW_SCRIPT_PATH: /w
+            MW_SERVER: http://localhost:8080
+            MEDIAWIKI_USER: Admin
+            MEDIAWIKI_PASSWORD: dockerpass
+            XDEBUG_CONFIG: ""
+        runs-on: ubuntu-latest
+        needs: vector_skin
 
         strategy:
             matrix:
@@ -29,6 +49,10 @@ jobs:
             - name: "Run eslint"
               run: |
                   npm run lint
+            - name: Setup mediawiki-docker
+              run: |
+                  docker-compose up -d
+                  docker ps -a
             - name: "Run playwright tests"
               run: |
                   npm run playwright:silent
