@@ -1,0 +1,9 @@
+#!/bin/bash -l
+echo "MW_DOCKER_PORT=8080
+MW_SCRIPT_PATH=/w
+MW_SERVER=http://localhost:8080
+MEDIAWIKI_USER=Admin
+MEDIAWIKI_PASSWORD=dockerpass
+XDEBUG_CONFIG=""
+MW_DOCKER_UID=$(id -u)
+MW_DOCKER_GID=$(id -g)" >> $1
