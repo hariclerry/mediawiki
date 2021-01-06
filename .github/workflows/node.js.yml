@@ -1,6 +1,3 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: Test CI
 
 on:
@@ -12,41 +9,38 @@ on:
 jobs:
     test:
         runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                node-version: [10.x]
+
         steps:
             - uses: actions/checkout@v2
-            - name: "Use Node.js ${{ matrix.node-version }}"
-              uses: actions/setup-node@v1
-              with:
-                  node-version: ${{ matrix.node-version }}
-
-            - name: "Add environment variables to env file"
-              run: |
-                  $(pwd)/.github/workflows/env_variables.sh $GITHUB_ENV
-            - name: "Clone vector skin repository"
-              run: |
-                  git clone "https://gerrit.wikimedia.org/r/mediawiki/skins/Vector" skins/Vector
-            - name: "Add docker-compose.override.yml"
-              run: |
-                  $(pwd)/.github/workflows/docker_compose_override.sh ${{ env.MW_DOCKER_UID }} ${{ env.MW_DOCKER_GID }}
-            - name: "Setup mediawiki-docker"
+            - name: Create .env file
+              run: "${GITHUB_WORKSPACE}/.github/scripts/environment.sh"
+              shell: bash
+            - name: Create docker-compose.override.yml
+              run: "${GITHUB_WORKSPACE}/.github/scripts/docker-compose.override.sh"
+              shell: bash
+            - name: Start Mediawiki-docker
               run: |
                   docker-compose up -d
-                  docker ps -a
                   docker-compose exec -T mediawiki composer update
                   docker-compose exec -T mediawiki /bin/bash /docker/install.sh
-            - name: "Add vector skin config to LocalSettings.php file"
-              run: |
-                  sudo bash -c "echo 'wfLoadSkin( 'Vector' );' >> LocalSettings.php"
-            - name: "Install dependencies & Run eslint"
+            - name: Clone skins/Vector
+              run: git clone "https://gerrit.wikimedia.org/r/mediawiki/skins/Vector" skins/Vector
+            - name: Setup LocalSettings.php
+              run: echo "wfLoadSkin( 'Vector' );" >> LocalSettings.php
+            - name: Setup Nodejs
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "10.x"
+            - name: Install dependencies & Run eslint
               run: |
                   npm ci
                   npm run lint
             - name: "Run playwright tests"
               run: |
                   npm run playwright:silent
-            - name: "Run wikimdia on localhost"
-              run: |
-                  curl http://localhost:8080/
+            - uses: actions/upload-artifact@v2
+              name: Upload artifacts
+              with:
+                  name: playwright-artifact
+                  path: tests/playwright/log
+                  retention-days: 5
