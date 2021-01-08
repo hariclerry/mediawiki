@@ -1,7 +1,6 @@
 'use strict';
 
 const assert = require( 'assert' );
-const CreateAccountPage = require( '../pageobjects/createaccount.page' );
 const PreferencesPage = require( '../pageobjects/preferences.page' );
 const UserLoginPage = require( 'wdio-mediawiki/LoginPage' );
 const Api = require( 'wdio-mediawiki/Api' );
@@ -18,14 +17,6 @@ describe( 'User', function () {
 		browser.deleteAllCookies();
 		username = Util.getTestString( 'User-' );
 		password = Util.getTestString();
-	} );
-
-	it( 'should be able to create account', function () {
-		// create
-		CreateAccountPage.createAccount( username, password );
-
-		// check
-		assert.strictEqual( CreateAccountPage.heading.getText(), `Welcome, ${username}!` );
 	} );
 
 	it( 'should be able to log in @daily', function () {

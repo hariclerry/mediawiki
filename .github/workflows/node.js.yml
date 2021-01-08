@@ -43,4 +43,4 @@ jobs:
               with:
                   name: playwright-artifact
                   path: tests/playwright/log
-                  retention-days: 5
+                  retention-days: 2
