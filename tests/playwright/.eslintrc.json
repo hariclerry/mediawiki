@@ -9,5 +9,8 @@
 	"parserOptions": {
 		"ecmaVersion": 8
 	},
-	"plugins": ["jest"]
+	"plugins": ["jest"],
+		"rules": {
+		"mediawiki/valid-package-file-require": "off"
+	}
 }

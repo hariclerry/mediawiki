@@ -1,4 +1,4 @@
-const Page = require( './page.js' );
+const Page = require( './page' );
 
 class RecentChangesPage extends Page {
 	constructor() {
@@ -7,7 +7,7 @@ class RecentChangesPage extends Page {
 		this.changeListTitles = '.mw-changeslist-title';
 	}
 
-	async getTitles() {
+	async getLatestTitle() {
 		await page.waitForSelector( this.changesList );
 		return await ( await page.$( this.changesList ) ).$$eval(
 			this.changeListTitles,

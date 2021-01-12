@@ -1,4 +1,4 @@
 module.exports = {
-	Util: require( './Util.js' ),
-	Api: require( './Api.js' )
+	Util: require( './Util' ),
+	Api: require( './Api' )
 };

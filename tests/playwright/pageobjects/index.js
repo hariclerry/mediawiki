@@ -1,3 +1,3 @@
 module.exports = {
-	RecentChangesPage: require( './recentchanges.page.js' )
+	RecentChangesPage: require( './recentchanges.page' )
 };
