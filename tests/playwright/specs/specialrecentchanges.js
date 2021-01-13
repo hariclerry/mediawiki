@@ -1,30 +1,33 @@
-/* eslint-disable mediawiki/valid-package-file-require */
-/* eslint-disable one-var */
 'use strict';
-const Api = require( '../helpers/Api' );
+const {
+	Api,
+	Util: { getTestString }
+} = require( '../helpers' );
+const { RecentChangesPage } = require( '../pageobjects' );
 
-describe( 'Special:RecentChanges', function () {
-	it( 'shows page creation', async () => {
-		const content = 'content-Iñtërnâtiônàlizætiøn';
-		const name = 'Name-Iñtërnâtiônàlizætiøn';
-		const bot = await Api.bot();
+describe( 'Special:RecentChanges', () => {
+	let content, name, bot;
 
-		const changesList = '.mw-changeslist';
-		const changeListTitles = '.mw-changeslist-title';
+	beforeAll( async () => {
+		bot = await Api.bot();
+	} );
 
+	beforeEach( async () => {
+		content = getTestString();
+		name = getTestString();
+	} );
+
+	afterEach( async () => {
+		await browser.close();
+	} );
+
+	it( 'should show page creation', async () => {
 		await bot.edit( name, content );
-		await page.goto(
-			`${global.baseUrl}/index.php?title=Special:RecentChanges`
-		);
+		await RecentChangesPage.open();
 		await page.screenshot( {
-			path: `${global.logPath}/Special-recent-changes-show-page.png`
+			path: `${global.logPath}/Special-RecentChanges-should-show-page-creation.png`
 		} );
-
-		await page.waitForSelector( changesList, { state: 'visible' } );
-		const title = await ( await page.$( changesList ) ).$$eval(
-			changeListTitles,
-			( el ) => el[ 0 ].innerText
-		);
+		const title = await RecentChangesPage.getLatestTitle();
 		expect( title ).toEqual( name );
 	} );
 } );
