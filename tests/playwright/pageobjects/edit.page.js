@@ -7,6 +7,7 @@ class EditPage extends Page {
 		this.displayedContent = '.mw-parser-output';
 		this.heading = '.firstHeading';
 		this.previewButton = '#wpPreview';
+		this.save = '#wpSave';
 	}
 
 	async openForEditing( title ) {
@@ -21,6 +22,12 @@ class EditPage extends Page {
 		await this.openForEditing( name );
 		await page.type( this.content, content );
 		await page.click( this.previewButton );
+	}
+
+	async edit( name, content ) {
+		await this.openForEditing( name );
+		await page.type( this.content, content );
+		await page.click( this.save );
 	}
 
 	async getHeadingText() {
