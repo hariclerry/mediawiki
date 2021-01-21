@@ -3,5 +3,7 @@ module.exports = {
 	CreateAccountPage: require( './createaccount.page' ),
 	UserLoginPage: require( './userlogin.page' ),
 	BlankPage: require( './blankpage.page' ),
-	EditPage: require( './edit.page' )
+	EditPage: require( './edit.page' ),
+	WatchablePage: require( './watchable.page' ),
+	WatchlistPage: require( './watchlist.page' )
 };
