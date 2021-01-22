@@ -2,7 +2,8 @@ const {
 	EditPage,
 	HistoryPage,
 	DeletePage,
-	UserLoginPage
+	UserLoginPage,
+	RestorePage
 } = require( '../pageobjects' );
 const {
 	Api,
@@ -106,9 +107,24 @@ describe( 'Page', () => {
 		} );
 
 		const displayedContent = await DeletePage.getDisplayedContent();
+
 		expect( displayedContent ).toContain(
 			`"${name}" has been deleted. See deletion log for a record of recent deletions.`
 		);
+	} );
+
+	it( 'should be restorable', async () => {
+		await bot.edit( name, content, 'create for delete' );
+		await bot.delete( name, 'delete for restore' );
+		await UserLoginPage.loginAdmin();
+		await RestorePage.restore( name, 'restore reason' );
+		await page.screenshot( {
+			path: `${global.logPath}/Page-should-be-restorable.png`
+		} );
+
+		const displayedContent = await RestorePage.getDisplayedContent();
+
+		expect( displayedContent ).toContain( name + ' has been restored' );
 	} );
 
 } );
