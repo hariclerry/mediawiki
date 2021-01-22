@@ -1,4 +1,9 @@
-const { EditPage, HistoryPage } = require( '../pageobjects' );
+const {
+	EditPage,
+	HistoryPage,
+	DeletePage,
+	UserLoginPage
+} = require( '../pageobjects' );
 const {
 	Api,
 	Util: { getTestString }
@@ -90,6 +95,20 @@ describe( 'Page', () => {
 		const commentText = await HistoryPage.getCommentText();
 
 		expect( commentText ).toEqual( `created with "${content}"` );
+	} );
+
+	it( 'should be deletable', async () => {
+		await bot.edit( name, content, 'create for delete' );
+		await UserLoginPage.loginAdmin();
+		await DeletePage.delete( name, 'delete reason' );
+		await page.screenshot( {
+			path: `${global.logPath}/Page-should-be-deletable.png`
+		} );
+
+		const displayedContent = await DeletePage.getDisplayedContent();
+		expect( displayedContent ).toContain(
+			`"${name}" has been deleted. See deletion log for a record of recent deletions.`
+		);
 	} );
 
 } );

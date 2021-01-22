@@ -14,6 +14,7 @@ class UserLoginPage extends Page {
 		await page.type( this.username, username );
 		await page.type( this.password, password );
 		await page.click( this.loginButton );
+		await page.waitForSelector( this.userPage );
 	}
 	async loginAdmin() {
 		await this.login( global.mwUser, global.mwPwd );
