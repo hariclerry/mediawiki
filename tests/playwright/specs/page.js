@@ -1,4 +1,4 @@
-const { EditPage } = require( '../pageobjects' );
+const { EditPage, HistoryPage } = require( '../pageobjects' );
 const {
 	Api,
 	Util: { getTestString }
@@ -78,6 +78,18 @@ describe( 'Page', () => {
 
 		expect( headingText ).toEqual( name );
 		expect( displayedContent ).toContain( editContent );
+	} );
+
+	it( 'should have history', async () => {
+		await bot.edit( name, content, `created with "${content}"` );
+		await HistoryPage.open( name );
+		await page.screenshot( {
+			path: `${global.logPath}/Page-should-have-history.png`
+		} );
+
+		const commentText = await HistoryPage.getCommentText();
+
+		expect( commentText ).toEqual( `created with "${content}"` );
 	} );
 
 } );
