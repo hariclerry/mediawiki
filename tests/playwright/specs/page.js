@@ -64,4 +64,20 @@ describe( 'Page', () => {
 		expect( displayedContent ).toEqual( content );
 	} );
 
+	it( 'should be editable', async () => {
+		let editContent = getTestString( 'editContent-' );
+
+		await bot.edit( name, content, 'create for edit' );
+		await EditPage.edit( name, editContent );
+		await page.screenshot( {
+			path: `${global.logPath}/Page-should-be-editable.png`
+		} );
+
+		const headingText = await EditPage.getHeadingText(),
+			displayedContent = await EditPage.getDisplayedContent();
+
+		expect( headingText ).toEqual( name );
+		expect( displayedContent ).toContain( editContent );
+	} );
+
 } );
