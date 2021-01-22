@@ -3,7 +3,8 @@ const {
 	HistoryPage,
 	DeletePage,
 	UserLoginPage,
-	RestorePage
+	RestorePage,
+	UndoPage
 } = require( '../pageobjects' );
 const {
 	Api,
@@ -125,6 +126,23 @@ describe( 'Page', () => {
 		const displayedContent = await RestorePage.getDisplayedContent();
 
 		expect( displayedContent ).toContain( name + ' has been restored' );
+	} );
+
+	it( 'should be undoable', async () => {
+		let response, previousRev, undoRev;
+
+		await bot.edit( name, content, 'create to edit and undo' );
+		response = await bot.edit( name, getTestString( 'editContent-' ) );
+		previousRev = response.edit.oldrevid;
+		undoRev = response.edit.newrevid;
+		await UndoPage.undo( name, previousRev, undoRev );
+		await page.screenshot( {
+			path: `${global.logPath}/Page-should-be-undoable.png`
+		} );
+
+		const displayedContent = await EditPage.getDisplayedContent();
+
+		expect( displayedContent ).toEqual( content );
 	} );
 
 } );

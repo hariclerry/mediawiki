@@ -8,5 +8,6 @@ module.exports = {
 	WatchlistPage: require( './watchlist.page' ),
 	HistoryPage: require( './history.page' ),
 	DeletePage: require( './delete.page' ),
-	RestorePage: require( './restore.page' )
+	RestorePage: require( './restore.page' ),
+	UndoPage: require( './undo.page' )
 };
