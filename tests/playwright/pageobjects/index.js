@@ -5,5 +5,9 @@ module.exports = {
 	BlankPage: require( './blankpage.page' ),
 	EditPage: require( './edit.page' ),
 	WatchablePage: require( './watchable.page' ),
-	WatchlistPage: require( './watchlist.page' )
+	WatchlistPage: require( './watchlist.page' ),
+	HistoryPage: require( './history.page' ),
+	DeletePage: require( './delete.page' ),
+	RestorePage: require( './restore.page' ),
+	UndoPage: require( './undo.page' )
 };
