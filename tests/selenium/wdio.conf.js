@@ -13,7 +13,10 @@ function fileName( title ) {
 
 // build file path
 function filePath( test, screenshotPath, extension ) {
-	return path.join( screenshotPath, `${fileName( test.parent )}-${fileName( test.title )}.${extension}` );
+	return path.join(
+		screenshotPath,
+		`${fileName( test.parent )}-${fileName( test.title )}.${extension}`
+	);
 }
 
 /**
@@ -60,19 +63,21 @@ exports.config = {
 	// Define the different browser configurations to use ("capabilities") here.
 	// ============
 	maxInstances: 1,
-	capabilities: [ {
-		// For Chrome/Chromium https://sites.google.com/a/chromium.org/chromedriver/capabilities
-		browserName: 'chrome',
-		'goog:chromeOptions': {
-			// If DISPLAY is set, assume developer asked non-headless or CI with Xvfb.
-			// Otherwise, use --headless.
-			args: [
-				...( process.env.DISPLAY ? [] : [ '--headless' ] ),
-				// Chrome sandbox does not work in Docker
-				...( fs.existsSync( '/.dockerenv' ) ? [ '--no-sandbox' ] : [] )
-			]
+	capabilities: [
+		{
+			// For Chrome/Chromium https://sites.google.com/a/chromium.org/chromedriver/capabilities
+			browserName: 'chrome',
+			'goog:chromeOptions': {
+				// If DISPLAY is set, assume developer asked non-headless or CI with Xvfb.
+				// Otherwise, use --headless.
+				args: [
+					...( process.env.DISPLAY ? [] : [ '--headless' ] ),
+					// Chrome sandbox does not work in Docker
+					...( fs.existsSync( '/.dockerenv' ) ? [ '--no-sandbox' ] : [] )
+				]
+			}
 		}
-	} ],
+	],
 
 	// ===================
 	// Test Configurations
@@ -83,23 +88,23 @@ exports.config = {
 	// Stop after this many failures, or 0 to run all tests before reporting failures.
 	bail: 0,
 	// Base for browser.url() and wdio-mediawiki/Page#openTitle()
-	baseUrl: ( process.env.MW_SERVER ) + (
-		process.env.MW_SCRIPT_PATH
-	),
-	services: [
-		...( process.env.SAUCE_ACCESS_KEY ? [ 'sauce' ] : [] )
-	],
+	baseUrl: process.env.MW_SERVER + process.env.MW_SCRIPT_PATH,
+	services: [ ...( process.env.SAUCE_ACCESS_KEY ? [ 'sauce' ] : [] ) ],
 	// See also: https://webdriver.io/docs/frameworks.html
 	framework: 'mocha',
 	// See also: https://webdriver.io/docs/dot-reporter.html
 	reporters: [
 		'dot',
 		// See also: https://webdriver.io/docs/junit-reporter.html#configuration
-		[ 'junit', {
-			outputDir: logPath
-		} ],
 		[
-			video, {
+			'junit',
+			{
+				outputDir: logPath
+			}
+		],
+		[
+			video,
+			{
 				saveAllVideos: true,
 				outputDir: logPath
 			}

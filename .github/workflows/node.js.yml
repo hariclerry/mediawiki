@@ -15,6 +15,9 @@ jobs:
             - name: Create .env file
               run: "${GITHUB_WORKSPACE}/.github/scripts/environment.sh"
               shell: bash
+            - uses: actions/checkout@master
+            - uses: nanasess/setup-chromedriver@master
+            - run: chromedriver --url-base=wd/hub --port=4444 &
             - name: Create docker-compose.override.yml
               run: "${GITHUB_WORKSPACE}/.github/scripts/docker-compose.override.sh"
               shell: bash
@@ -31,13 +34,17 @@ jobs:
               uses: actions/setup-node@v1
               with:
                   node-version: "10.x"
+            - name: environment variables
+              run: |
+                  cat .env
             - name: Install dependencies & Run eslint
               run: |
                   npm ci
                   npm run lint
-            - name: "Run playwright tests"
-              run: |
-                  npm run playwright:silent
+            - name: Run selenium tests
+              run: npm run selenium-test
+            - name: Run playwright tests
+              run: npm run playwright:silent
             - uses: actions/upload-artifact@v2
               name: Upload artifacts
               with:
