@@ -34,20 +34,18 @@ jobs:
               uses: actions/setup-node@v1
               with:
                   node-version: "10.x"
-            - name: environment variables
-              run: |
-                  cat .env
             - name: Install dependencies & Run eslint
               run: |
                   npm ci
                   npm run lint
-            - name: Run selenium tests
-              run: npm run selenium-test
             - name: Run playwright tests
-              run: npm run playwright:silent
+              run: |
+                  npm run playwright:silent
+            - name: Run webdriver.io tests
+              run: npm run selenium-test
             - uses: actions/upload-artifact@v2
               name: Upload artifacts
               with:
                   name: playwright-artifact
                   path: tests/playwright/log
-                  retention-days: 5
+                  retention-days: 2
