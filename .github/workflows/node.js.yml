@@ -15,6 +15,9 @@ jobs:
             - name: Create .env file
               run: "${GITHUB_WORKSPACE}/.github/scripts/environment.sh"
               shell: bash
+            - uses: actions/checkout@master
+            - uses: nanasess/setup-chromedriver@master
+            - run: chromedriver --url-base=wd/hub --port=4444 &
             - name: Create docker-compose.override.yml
               run: "${GITHUB_WORKSPACE}/.github/scripts/docker-compose.override.sh"
               shell: bash
@@ -35,12 +38,20 @@ jobs:
               run: |
                   npm ci
                   npm run lint
-            - name: "Run playwright tests"
+            - name: Run playwright tests
               run: |
                   npm run playwright:silent
             - uses: actions/upload-artifact@v2
-              name: Upload artifacts
+              name: Upload playwright artifacts
               with:
                   name: playwright-artifact
                   path: tests/playwright/log
-                  retention-days: 5
+                  retention-days: 2
+            - name: Run webdriver.io tests
+              run: npm run selenium-test
+            - uses: actions/upload-artifact@v2
+              name: Upload selenium artifacts
+              with:
+                  name: selenium-artifact
+                  path: tests/selenium/log
+                  retention-days: 2
