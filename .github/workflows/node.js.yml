@@ -38,17 +38,9 @@ jobs:
               run: |
                   npm ci
                   npm run lint
-            - name: Run playwright tests
-              run: |
-                  npm run playwright:silent
-            - uses: actions/upload-artifact@v2
-              name: Upload playwright artifacts
-              with:
-                  name: playwright-artifact
-                  path: tests/playwright/log
-                  retention-days: 2
             - name: Run webdriver.io tests
-              run: npm run selenium-test
+              run: |
+                  npm run selenium-test
             - uses: actions/upload-artifact@v2
               name: Upload selenium artifacts
               with:
