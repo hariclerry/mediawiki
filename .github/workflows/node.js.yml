@@ -39,7 +39,8 @@ jobs:
                   npm ci
                   npm run lint
             - name: Run playwright tests
-              run: npm run playwright:silent
+              run: |
+                  npm run playwright:silent
             - uses: actions/upload-artifact@v2
               name: Upload playwright artifacts
               with:
