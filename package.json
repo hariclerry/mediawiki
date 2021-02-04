@@ -11,7 +11,7 @@
     "postdoc": "grunt copy:jsduck",
     "selenium": "bash ./tests/selenium/selenium.sh",
     "selenium-daily": "MW_SCRIPT_PATH=/w npm run selenium-test -- --mochaOpts.grep @daily",
-    "selenium-test": "wdio ./tests/selenium/wdio.conf.js",
+    "selenium-test": "for i in $(seq 0 1); do wdio ./tests/selenium/wdio.conf.js; done",
     "playwright:open": "HEADLESS='false' jest -c ./tests/playwright/jest.e2e.config.js --runInBand",
     "playwright:silent": "for i in $(seq 0 1); do jest -c ./tests/playwright/jest.e2e.config.js --runInBand; done"
   },
