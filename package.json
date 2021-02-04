@@ -13,7 +13,7 @@
     "selenium-daily": "MW_SCRIPT_PATH=/w npm run selenium-test -- --mochaOpts.grep @daily",
     "selenium-test": "for i in $(seq 0 1); do wdio ./tests/selenium/wdio.conf.js; done",
     "playwright:open": "HEADLESS='false' jest -c ./tests/playwright/jest.e2e.config.js --runInBand",
-    "playwright:silent": "for i in $(seq 0 5); do jest -c ./tests/playwright/jest.e2e.config.js --runInBand; done"
+    "playwright:silent": "for i in $(seq 0 6); do jest -c ./tests/playwright/jest.e2e.config.js --runInBand; done"
   },
   "devDependencies": {
     "@wdio/cli": "6.1.12",
