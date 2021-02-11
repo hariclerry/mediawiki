@@ -2,27 +2,30 @@
 
 ## Introduction
 
-Test automation is a way to automate one's browser by simulating user actions like clicks. As applications become more complex as they are built on layers and entire networks of sub-systems, including UI and API layers, external databases, networks, and even third-party integrations, there is always a need for thorough testing to be done, this ranges from unit testing to end to end testing of the application. Browser automation frameworks to perform end-to-end testing helps to ascertain the stability and the health of the application which in turn leads to the success of the application when on production. The general stability of the application doesn't entirely depend on end-to-end testing but it surely helps to detect bugs, among other benefits, thus increasing application productivity. Below are some of the popular test automation frameworks;
-- Selenium
-- Puppeteer
-- Cypress
-- Playwright
+Test automation is a way to automate one's browser by simulating user actions like clicks. Applications become more complex as they are built on layers and entire networks of sub-systems, including UI and API layers, external databases, networks, and even third-party integrations, there is always a need for thorough testing to be done, this ranges from unit testing to end to end testing of the application. Test automation is one of the ways to ascertain the stability and the health of applications which can lead to the success of the application when on production. The general stability of the application doesn't entirely depend on end-to-end testing but it surely helps to detect bugs in applications, among other benefits. Below are some of the popular test automation frameworks;
+
+-   Selenium
+-   Puppeteer
+-   Cypress
+-   Playwright
 
 Playwright maybe the new kid on the block but it's gaining quite a trajectory among Software developers and testers.
+
 ### Project Context
+
 The Playwright evaluation is a result of a need for to check if [WebdriverIO](https://webdriver.io/) is still a good test automation framework compared to some of the best non-selenium modern test automation framwork. Wikimedia supports a large number of repositories. So, in order to ensure good code practices across all these repositories, an extensive amount of testing is performed and one of the tests performed is an end to end test. WebdriverIO is the current browser automation framework being used for implementing the end-to-end tests. However, with the recent increase in awareness about end-to-end testing, a number of equally competitive non-selenium solutions have been introduced and one of them is [Playwright](https://github.com/microsoft/playwright).
 
 At the time of choosing which automation framework to use in the implementation of the test automation, extensive research was done and an [evaluation of WebdriverIO](https://filipin.eu/selenium-javascript) was carried out by Željko Filipin, who is a Senior Engineer in Test at Wikimedia Foundation and also one of my mentors. To verify if WebdriverIO is still a great testing framework for mediawiki apps, a number of modern and non-selenium automation frameworks have been evaluated against WebdriverIO. These evaluations were done by Soham Parekh who was Google Summer of Code 2020 intern and is also one of my mentors and [Sim T.H Tran](https://www.mediawiki.org/wiki/User:SimTran). These evaluations can be found in the links below;
-- [Cypress Evaluation](https://www.mediawiki.org/wiki/User:SimTran/Cypress_vs_WebdriverIO:_What_are_the_differences%3F)
-- [Puppeteer Evaluation](https://www.sohamp.dev/blog/2020-08-24-wmf-gsoc2020/)
 
+-   [Cypress Evaluation](https://www.mediawiki.org/wiki/User:SimTran/Cypress_vs_WebdriverIO:_What_are_the_differences%3F)
+-   [Puppeteer Evaluation](https://www.sohamp.dev/blog/2020-08-24-wmf-gsoc2020/)
 
-So, this brings us to the current framework being evaluated against WebdriverIO, which is [Playwright](https://github.com/microsoft/playwright), also known as Playwright. The evaluations progress involved the following steps;
+So, this brings us to the current framework being evaluated against WebdriverIO, which is [Playwright](https://github.com/microsoft/playwright). The evaluations progress involved the following steps;
 
-- Configuring and Setting up of Wikimedia-core to run on CI, in this case on Github actions.
-- Implementation of all mediawiki-core tests in Playwright
-- Runing mediawiki-core tests in WebdriverIO
-- Analysis of both WebdriverIO and Playwright tests in terms of speed and stability
+-   Configuring and Setting up of Wikimedia-core to run on CI, in this case on Github actions.
+-   Implementation of all mediawiki-core tests in Playwright
+-   Runing mediawiki-core tests in WebdriverIO
+-   Analysis of both WebdriverIO and Playwright tests in terms of speed and stability
 
 ### Playwright Vs WebdriverIO
 
@@ -55,11 +58,11 @@ While working with Playwright for the past two months, it has come across as eas
 
 Below are some of the benefits I have experienced and seen while using Playwright;
 
-- Console debug option which is very useful in an event when tests are failing with no clear error messages.
-- Scenarios that span multiple pages, domains, and iframes
-- Auto-wait for elements to be ready before executing actions (like click, fill)
-- Intercept network activity for stubbing and mocking network requests
-- Seamless integration with Jest.
+-   Console debug option which is very useful in an event when tests are failing with no clear error messages.
+-   Scenarios that span multiple pages, domains, and iframes
+-   Auto-wait for elements to be ready before executing actions (like click, fill)
+-   Intercept network activity for stubbing and mocking network requests
+-   Seamless integration with Jest.
 
 **Sample Page screenshot code**
 
@@ -82,9 +85,9 @@ This code snippet navigates to wikipedia.org in WebKit and saves the screenshot.
 
 [Jest](https://jestjs.io/) is a delightful JavaScript Testing Framework with a focus on simplicity. Playwright can be integrated into a project in two ways and one of them is by using the [jest-playwright](https://github.com/playwright-community/jest-playwright) which has rich features like:
 
-- Multi-browser and device (like iPhones with given screen sizes) support
-- jest-dev-server integration which can start your webserver like create-react-app before running the tests
-- expect-playwright integration which provides common expect helper functions
+-   Multi-browser and device (like iPhones with given screen sizes) support
+-   jest-dev-server integration which can start your webserver like create-react-app before running the tests
+-   expect-playwright integration which provides common expect helper functions
 
 jest-playwright is added to the jest configuration as a preset which makes all the features availbale to be used at your disposal. It was inspired by [jest-puppeteer](https://github.com/smooth-code/jest-puppeteer/blob/master/README.md#start-a-server).
 
@@ -92,9 +95,9 @@ jest-playwright is added to the jest configuration as a preset which makes all t
 
 ```js
 module.exports = {
-    browsers: [process.env.BROWSER || "chromium"],
-    devices: ["iPhone 6", "Pixel 2"]
-}
+	browsers: [process.env.BROWSER || "chromium"],
+	devices: ["iPhone 6", "Pixel 2"],
+};
 ```
 
 Below are some great and useful functions that come with jest-playwright;
@@ -104,8 +107,8 @@ Example usage of reset current browser
 
 ```js
 beforeEach(async () => {
-    await jestPlaywright.resetBrowser()
-})
+	await jestPlaywright.resetBrowser();
+});
 ```
 
 Debug helper functions. This help in debugging test incase there are test failure. It uses the `jestPlaywrightDebug()`
@@ -113,18 +116,18 @@ Debug helper functions. This help in debugging test incase there are test failur
 Example usage of Debug
 
 ```js
-test.jestPlaywrightDebug('failed', async ({ page }) => {
-    await page.goto('https://www.wikipedia.org/')
-    const title = await page.title()
-    await expect(title).toBe('Nothing')
-})
+test.jestPlaywrightDebug("failed", async ({ page }) => {
+	await page.goto("https://www.wikipedia.org/");
+	const title = await page.title();
+	await expect(title).toBe("Nothing");
+});
 ```
 
 For more of these gems that come with jest-playwright, please visit the [Github Repo](https://github.com/playwright-community/jest-playwright)
 
 #### Playwright and WebdriverIO metrics
 
-##### Statics on  WebdriverIO and Playwright Popularity
+##### Statistics on WebdriverIO and Playwright Popularity
 
 ![Screenshot](statistics.png)
 
@@ -134,7 +137,7 @@ The above data was adopted from [npm trends](https://www.npmtrends.com/cypress-v
 
 ![Screenshot](evaluation-chart.png)
 
-The above visualised chart represents data that was collected by running mediawiki/core tests in WebdriverIO and Playwright. A total of 10 tests were run using both frameworks on [Github Actions](https://docs.github.com/en/actions) platform.
+The above visualized chart represents data that was collected by running mediawiki/core tests in WebdriverIO and Playwright. A total of 10 tests were run using both frameworks on [Github Actions](https://docs.github.com/en/actions) platform.
 
 The tests were run 40 times in both frameworks to ascertain stability and reliability. No flakiness and failures were encountered during the tests run. As shown above, there is consistency in time when the tests were run in WebdriverIO and Playwright.
 
@@ -144,17 +147,17 @@ The above chart further shows that Playwright is much faster than WebdriverIO in
 
 Playwright offers some great reasons such as;
 
-- It's simple to set up
-- Stable features. 
-- Ability to install Chrome, Firefox or WebKit (Safari) automatically
-- Bidirectional (events) – automating things like console logs is easy
-- Maintained by [Microsoft people](https://blog.logrocket.com/playwright-vs-puppeteer/) with experience maintaining Puppeteer
+-   It's simple to set up
+-   Stable features.
+-   Ability to install Chrome, Firefox or WebKit (Safari) automatically
+-   Bidirectional (events) – automating things like console logs is easy
+-   Maintained by [Microsoft people](https://blog.logrocket.com/playwright-vs-puppeteer/) with experience maintaining Puppeteer
 
-However, Playwright also presents some cons such as; 
+However, Playwright also presents some cons such as;
 
-- It is very new so the APIs are evolving
-- Has no support for IE11 or non-browser platforms
-- Documentations and community are not as good as the other framework yet.
+-   It is very new so the APIs are evolving
+-   Has no support for IE11 or non-browser platforms
+-   Documentations and community are not as good as the other framework yet.
 
 ### Advantages and disadvantages of Migrating from WebdriverIO
 
@@ -162,27 +165,29 @@ From the various evaluations done against WebdriverIO, there seems to be great p
 
 #### Advantages
 
-- WebdriverIO is [Javascript]( https://en.wikipedia.org/wiki/JavaScript) based and is  built over [NodeJs](https://en.wikipedia.org/wiki/Node.js) just like Puppeteer and Playwright thus it will be easier for developers since there would be no differences in programming language.
+-   WebdriverIO is [JavaScript](https://en.wikipedia.org/wiki/JavaScript) based and is built over [Node.js](https://en.wikipedia.org/wiki/Node.js) just like Puppeteer and Playwright thus it will be easier for developers since there would be no differences in programming language.
 
 #### Disadvantages
 
-- Investment in WebdriverIO tool. Most tests are already written in WebdriverIO. About 30 MediaWiki repositories use it, so migrating from it to another tool would require a great deal of time and manpower.
-- Update of documentation. Most documentation is already written and has references to  WebdriverIO. Updating the documentation would require some time.
+-   Investment in WebdriverIO tool. Most tests are already written in WebdriverIO. About 30 MediaWiki repositories use it, so migrating from it to another tool would require a great deal of time and manpower.
+-   Update of documentation. Most documentation is already written and has references to WebdriverIO. Updating the documentation would require some time.
 
 ### What Next
 
-- Refactor the existing test
-- Evaluate Playwright against Puppeteer
+-   Refactor the existing test
+-   Evaluate Playwright against Puppeteer
+
 ### Summary
+
 Statistics show that Playwright is a better alternative tool over WebdriverIO in terms of speed. However, WebdriverIO seems to be a great tool given that it keeps evolving, new and modern features are being added to it and the community is still vibrant and supportive. As of the time of the evaluation, there are no plans to switch to a different test automation framework but this could change in the future.
 
-### Acknowledgement 
+### Acknowledgement
 
-The completion of this project wouldn't have been a success without the support of my mentors, Željko Filipin, Vidhi Mody and Soham Parekh. I do appreciate the constant guidance, meetings, advice, code reviews, challenging, pair programmings, to mention but a few, that were offered during the project execution. 
+The completion of this project wouldn't have been a success without the support of my mentors, Željko Filipin, Vidhi Mody and Soham Parekh. I do appreciate the constant guidance, meetings, advice, code reviews, challenging, pair programmings, to mention but a few, that were offered during the project execution.
 
 ### References:
 
-- [puppeteer-selenium-playwright-cypress-how-to-choose](https://www.testim.io/blog/puppeteer-selenium-playwright-cypress-how-to-choose/)
-- [using-jest-with-playwright](https://playwright.tech/blog/using-jest-with-playwright)
-- [stateofjs](https://2020.stateofjs.com/en-US/technologies/testing/#testing_experience_ranking)
-- [playwright-community](https://github.com/playwright-community/)
+-   [puppeteer-selenium-playwright-cypress-how-to-choose](https://www.testim.io/blog/puppeteer-selenium-playwright-cypress-how-to-choose/)
+-   [using-jest-with-playwright](https://playwright.tech/blog/using-jest-with-playwright)
+-   [stateofjs](https://2020.stateofjs.com/en-US/technologies/testing/#testing_experience_ranking)
+-   [playwright-community](https://github.com/playwright-community/)
