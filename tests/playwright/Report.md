@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Test automation is a way to automate one's browser by simulating user actions like clicks. Applications become more complex as they are built on layers and entire networks of sub-systems, including UI and API layers, external databases, networks, and even third-party integrations, there is always a need for thorough testing to be done, this ranges from unit testing to end to end testing of the application. Test automation is one of the ways to ascertain the stability and the health of applications which can lead to the success of the application when on production. The general stability of the application doesn't entirely depend on end-to-end testing but it surely helps to detect bugs in applications, among other benefits. Below are some of the popular test automation frameworks;
+Test automation is a way to automate one's browser by simulating user actions like clicks. Applications become more complex as they are built on layers and entire networks of sub-systems, including UI and API layers, external databases, networks, and even third-party integrations. So, there is always a need for thorough testing to be done and this ranges from unit testing to end-to-end testing of applications. Test automation is one of the ways to ascertain the stability and the health of applications which can lead to the success of the application when on production. The general stability of the application doesn't entirely depend on end-to-end testing but it surely helps to detect bugs in applications, among other benefits.
+
+Below are some of the popular test automation frameworks being used;
 
 -   Selenium
 -   Puppeteer
@@ -30,31 +32,22 @@ So, this brings us to the current framework being evaluated against WebdriverIO,
 ### Playwright Vs WebdriverIO
 
 [WebdriverIO](https://github.com/webdriverio/webdriverio) is a test automation framework that allows you to run tests based on the Webdriver protocol and Appium automation technology. WebdriverIO is known to be;
-Extendable
-Adding helper functions, or more complicated sets and combinations of existing commands is simple and really useful
 
-Compatible
-WebdriverIO can be run on the WebDriver Protocol for true cross-browser testing as well as Chrome DevTools Protocol for Chromium-based automation using Puppeteer.
-
-Feature Rich
-The huge variety of community plugins allows you to easily integrate and extend your setup to fulfill your requirements.
+-   Extendable: Adding helper functions, or more complicated sets and combinations of existing commands is simple and really useful
+-   Compatible: WebdriverIO can be run on the WebDriver Protocol for true cross-browser testing as well as Chrome DevTools Protocol for Chromium-based automation using Puppeteer.
+-   Feature Rich: The huge variety of community plugins allows you to easily integrate and extend your setup to fulfill your requirements.
 
 The above points are just a few of WebdriverIO capability. To explore more WebdriverIO capabilities, you can check out the [WebdriverIO](https://webdriver.io/) documentation and the [Wikipedia Repo](https://www.mediawiki.org/wiki/Selenium).
 
 [Playwright](https://github.com/microsoft/playwright) is a Node.js library to automate Chromium, Firefox, and WebKit with a single API. Playwright is known for the following capability;
 
-Test across all modern browsers
-Single API to automate Chromium, Firefox, and WebKit.
+-   Test across all modern browsers: Single API to automate Chromium, Firefox, and WebKit.
+-   Use in your preferred language: Use the Playwright API in JavaScript & TypeScript, Python, C# and, Java.
+-   Automate without trade-offs: Capable automation for single-page apps that rely on the modern web platform.
 
-Use in your preferred language
-Use the Playwright API in JavaScript & TypeScript, Python, C# and, Java.
+The above points are just a few capabilities. To explore more on Playwright capability, you can check out the [Playwright](https://playwright.dev/) documentation and my [MediaWiki Core fork](https://github.com/hariclerry/mediawiki/tree/master/tests/playwright).
 
-Automate without trade-offs
-Capable automation for single-page apps that rely on the modern web platform.
-
-The above points are just a few capabilities. To explore more on Playwright capability, you can check out the [Playwright](https://playwright.dev/) documentation and this [ forked Wikipedia Repo](https://github.com/hariclerry/mediawiki/tree/master/tests/playwright).
-
-While working with Playwright for the past two months, it has come across as easy to install and setup. The package takes care of installing all the browsers(Chromium, Firefox, and WebKit). Capturing Screenshots is an out-of-the-box experience. However, Video recording requires separate installation of [playwright-video and ffmpeg](https://playwright.tech/blog/record-your-browser-tests-with-playwright) but they all blend in with Playwright seamlessly.
+While working with Playwright for the past two months, it has come across as easy to install and setup. The package takes care of installing all the browsers(Chromium, Firefox, and WebKit). Capturing Screenshots is an out-of-the-box experience. However, video recording requires separate installation of [playwright-video and ffmpeg](https://playwright.tech/blog/record-your-browser-tests-with-playwright) but they all blend in with Playwright seamlessly.
 
 Below are some of the benefits I have experienced and seen while using Playwright;
 
@@ -64,24 +57,24 @@ Below are some of the benefits I have experienced and seen while using Playwrigh
 -   Intercept network activity for stubbing and mocking network requests
 -   Seamless integration with Jest.
 
-**Sample Page screenshot code**
+#### Sample Playwright Page screenshot code
 
 This code snippet navigates to wikipedia.org in WebKit and saves the screenshot.
 
-```
-    const playwright = require('playwright');
+```js
+const playwright = require("playwright");
 
-    (async () => {
-        const browser = await webkit.launch();
-        const context = await browser.newContext();
-        const page = await context.newPage();
-        await page.goto('https://www.wikipedia.org/');
-        await page.screenshot({ path: 'wikipedia-home-page.png' });
-        await browser.close();
-    })();
+(async () => {
+	const browser = await webkit.launch();
+	const context = await browser.newContext();
+	const page = await context.newPage();
+	await page.goto("https://www.wikipedia.org/");
+	await page.screenshot({ path: "wikipedia-home-page.png" });
+	await browser.close();
+})();
 ```
 
-**Playwright and Jest**
+#### Playwright and Jest
 
 [Jest](https://jestjs.io/) is a delightful JavaScript Testing Framework with a focus on simplicity. Playwright can be integrated into a project in two ways and one of them is by using the [jest-playwright](https://github.com/playwright-community/jest-playwright) which has rich features like:
 
