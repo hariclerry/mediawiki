@@ -37,7 +37,6 @@ jobs:
             - name: Install dependencies & Run eslint
               run: |
                   npm ci
-                  npm run lint
             - name: Run playwright tests
               run: |
                   npm run playwright:silent
@@ -54,4 +53,12 @@ jobs:
               with:
                   name: selenium-artifact
                   path: tests/selenium/log
+                  retention-days: 2
+            - name: Run puppeteer tests
+              run: npm run puppeteer:silent
+            - uses: actions/upload-artifact@v2
+              name: Upload puppeteer artifacts
+              with:
+                  name: puppeteer-artifact
+                  path: tests/puppeteer/log
                   retention-days: 2
