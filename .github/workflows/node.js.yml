@@ -37,6 +37,7 @@ jobs:
             - name: Install dependencies & Run eslint
               run: |
                   npm ci
+                  npm run lint
             - name: Run playwright tests
               run: |
                   npm run playwright:silent

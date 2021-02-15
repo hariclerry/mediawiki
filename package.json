@@ -15,7 +15,7 @@
     "playwright:open": "HEADLESS='false' jest -c ./tests/playwright/jest.e2e.config.js --runInBand",
     "playwright:silent": "for i in $(seq 0 0); do jest -c ./tests/playwright/jest.e2e.config.js --runInBand; done",
     "puppeteer:open": "HEADLESS='false' jest --runInBand -c ./tests/puppeteer/jest.config.js",
-    "puppeteer:silent": "jest --runInBand -c ./tests/puppeteer/jest.config.js"
+    "puppeteer:silent": "for i in $(seq 0 0); do jest --runInBand -c ./tests/puppeteer/jest.config.js; done"
   },
   "devDependencies": {
     "@wdio/cli": "6.1.12",
@@ -30,6 +30,7 @@
     "babel-eslint": "10.1.0",
     "dotenv": "8.2.0",
     "eslint-config-wikimedia": "0.17.0",
+    "eslint-plugin-jasmine": "4.1.2",
     "eslint-plugin-jest": "24.1.3",
     "eslint-plugin-jest-playwright": "0.2.1",
     "ffmpeg-static": "4.2.7",
