@@ -6,11 +6,15 @@
 
 - [Project Background](#project-background)
 
-- [Playwright Vs WebdriverIO](#playwright-vs-webdriverIO)
-
-  - [Sample Playwright code](#sample-playwright-page-screenshot-code)
+- [WebdriverIO](#webdriverIO)
+  - [Sample WebdriverIO test code](#sample-playwright-test-code)
+    - [Mocha](#webdriverIO-and-mocha)
+      - [WebdriverIO and Mocha code](#sample-webdriverIO-and-mocha-code)
+- [Playwright](#playwright)
+  - [Sample Playwright test code](#sample-playwright-test-code)
   - [Jest](#playwright-and-jest)
     - [Jest configuration](#example-of-jest-playwright-config-js)
+- [Playwright Vs WebdriverIO](#playwright-vs-webdriverIO)
   - [Metrics](#playwright-and-webdriverIO-metrics)
     - [Statistics](#statistics-on-webdriverIO-and-playwright-popularity)
     - [MediaWiki Core Test Suite](#webdriverIO-and-playwright-mediawiki-core-tests-analysis)
@@ -56,7 +60,7 @@ So, this brings us to the current framework being evaluated against WebdriverIO,
 - Running MediaWiki Core tests in WebdriverIO
 - Analysis of both WebdriverIO and Playwright tests in terms of speed and stability
 
-## Playwright Vs WebdriverIO
+## WebdriverIO
 
 [WebdriverIO](https://github.com/webdriverio/webdriverio) is a test automation framework that allows you to run tests based on the Webdriver protocol and Appium automation technology. WebdriverIO is known to be;
 
@@ -65,6 +69,51 @@ So, this brings us to the current framework being evaluated against WebdriverIO,
 - Feature Rich: The huge variety of community plugins allows you to easily integrate and extend your setup to fulfill your requirements.
 
 The above points are just a few of WebdriverIO capability. To explore more WebdriverIO capabilities, you can check out the [WebdriverIO](https://webdriver.io/) documentation and the [Wikipedia Repo](https://www.mediawiki.org/wiki/Selenium).
+
+WebdriverIO provides the ability and options to run commands in both asynchronous and synchronous operations. For asynchronous operations, you can use the JavaScript usual async/await, however for synchronous, it can be done through [node-fibers](https://www.npmjs.com/package/fibers). Both of these options have their own benefits and issues which can be found on the [WebdriverIO](https://webdriver.io/docs/sync-vs-async) website.
+
+### Sample WebdriverIO test code
+
+This code snippet navigates to wikipedia.org in Chrome and saves the screenshot.
+
+```js
+const { remote } = require('webdriverio');
+
+(async () => {
+ const browser = await remote({
+        capabilities: {
+            browserName: 'chrome'
+        }
+  })
+  await browser.url('https://www.wikipedia.org/')
+
+  await browser.getTitle()
+
+  await browser.saveScreenshot('./screenshot.png')
+  await browser.deleteSession();
+})();
+```
+
+### WebdriverIO and Mocha
+
+The WebdriverIO WDIO runner currently supports Mocha, Jasmine, and Cucumber frameworks and WikiMedia Core test is currently using Mocha framework. [Mocha](https://mochajs.org/) is a feature-rich JavaScript test framework running on Node.js and in the browser, making asynchronous testing simple and fun.
+
+WebdriverIO provides an adapter for Mocha which can easily be added as `@wdio/mocha-framework`.
+
+#### Sample WebdriverIO and Mocha code
+
+This code snippet navigates to wikipedia.org in Chrome and saves the screenshot.
+
+```js
+describe('Wikipedia home page', () => {
+    it('should display correct page title', () => {
+        browser.url('https://www.wikipedia.org/')
+        expect(browser).toHaveTitle('The Free Encyclopedia')
+    })
+});
+```
+
+## Playwright
 
 [Playwright](https://github.com/microsoft/playwright) is a Node.js library to automate Chromium, Firefox, and WebKit with a single API. Playwright is known for the following capability;
 
@@ -84,7 +133,7 @@ Below are some of the benefits I have experienced and seen while using Playwrigh
 - Intercept network activity for stubbing and mocking network requests
 - Seamless integration with Jest.
 
-### Sample Playwright Page screenshot code
+### Sample Playwright test code
 
 This code snippet navigates to wikipedia.org in WebKit and saves the screenshot.
 
@@ -150,15 +199,15 @@ test.jestPlaywrightDebug("failed", async ({ page }) => {
 
 For more of these gems that come with jest-playwright, please visit the [Github Repo](https://github.com/playwright-community/jest-playwright)
 
-### Playwright and WebdriverIO metrics
+## Playwright Vs WebdriverIO
 
-#### Statistics on WebdriverIO and Playwright Popularity
+### Statistics on WebdriverIO and Playwright Popularity
 
 ![Screenshot](statistics.png)
 
 The above data was adopted from [npm trends](https://www.npmtrends.com/cypress-vs-playwright-vs-puppeteer-vs-selenium-vs-testcafe) showing some of the most popular automation test tools. From the above charts, we see that WebdriverIO still trumps Playwright when it comes to popularity among the testing community.
 
-#### WebdriverIO and Playwright MediaWiki Core Tests Analysis
+### WebdriverIO and Playwright MediaWiki Core Tests Analysis
 
 ![Screenshot](evaluation-chart.png)
 
