@@ -211,6 +211,20 @@ For more of these gems that come with jest-playwright, please visit the [Github 
 
 ## Playwright Vs WebdriverIO
 
+The below table is a comparison between Playwright and WebdriverIO in terms of;
+
+- Performance
+- Developer Experience
+- Documentation
+- Ecosystem/Community
+
+|Key Factors|Playwright|WebdriverIO|
+|----------|----------|----------|
+|Performance|Placeholder text|Placeholder text|
+|Developer Experience|Placeholder text|Placeholder text|
+|Documentation|Placeholder text|Placeholder text|
+|Ecosystem/Community|Placeholder text|Placeholder text|
+
 ### Statistics
 
 ![Screenshot](statistics.png)
