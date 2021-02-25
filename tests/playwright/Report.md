@@ -15,13 +15,12 @@
   - [Sample Playwright Code](#sample-playwright-code)
   - [Jest](#jest)
   - [Sample Jest Code](#sample-jest-code)
+  - [Playwright Advantages](#playwright-advantages)
+  - [Playwright Disadvantages](#playwright-disadvantages)
 
 - [Playwright Vs WebdriverIO](#playwright-vs-webdriverIO)
   - [Statistics](#statistics)
   - [MediaWiki Core Tests](#mediawiki-core-tests)
-  - [Why Adapt Playwright](#why-adapt-playwright)
-  - [Playwright Advantages](#playwright-advantages)
-  - [Playwright Disadvantages](#playwright-disadvantages)
   - [Migrating From WebdriverIO](#migrating-from-webdriverio)
   - [Advantages](#advantages)
   - [Disadvantages](#disadvantages)
@@ -77,9 +76,10 @@ WebdriverIO provides the ability and options to run commands in both asynchronou
 
 ### Sample WebdriverIO Code
 
-This code snippet navigates to wikipedia.org in Chrome and saves the screenshot.
+The code snippet below navigates to wikipedia.org in Chrome and checks if the correct title is being displayed.
 
 ```js
+const assert = require('assert')
 const { remote } = require('webdriverio');
 
 (async () => {
@@ -87,12 +87,12 @@ const { remote } = require('webdriverio');
         capabilities: {
             browserName: 'chrome'
         }
-  })
+  });
   await browser.url('https://www.wikipedia.org/')
 
-  await browser.getTitle()
+  const title = await browser.getTitle();
+  assert(title === "The Free Encyclopedia");
 
-  await browser.saveScreenshot('./screenshot.png')
   await browser.deleteSession();
 })();
 ```
@@ -115,13 +115,16 @@ describe('Wikipedia home page', async() => {
         capabilities: {
             browserName: 'chrome'
         }
-  })
+  });
 
   it('should display correct page title', async() => {
-        await browser.url('https://www.wikipedia.org/')
-        expect(browser).toHaveTitle('The Free Encyclopedia')
+    await browser.url('https://www.wikipedia.org/');
+
+    expect(browser).toHaveTitle('The Free Encyclopedia');
+    
+    await browser.deleteSession();
   })
-});
+})();
 ```
 
 ## Playwright
@@ -146,18 +149,22 @@ Below are some of the benefits I have experienced and seen while using Playwrigh
 
 ### Sample Playwright Code
 
-The code snippet below navigates to wikipedia.org in Chrome and saves the screenshot.
+The code snippet below navigates to wikipedia.org in Chrome and checks if the correct title is being displayed.
 
 ```js
-const playwright = require("playwright");
+const assert = require("assert");
+const { chromium } = require("playwright");
 
 (async () => {
- const browser = await chrome.launch();
- const context = await browser.newContext();
- const page = await context.newPage();
- await page.goto("https://www.wikipedia.org/");
- await page.screenshot({ path: "wikipedia-home-page.png" });
- await browser.close();
+  let browser, page;
+  browser = await chromium.launch();
+  page = await browser.newPage();
+  await page.goto("https://www.wikipedia.org/");
+
+  const title = await page.innerText(".localized-slogan");
+  assert(title === "The Free Encyclopedia");
+
+  await browser.close();
 })();
 ```
 
@@ -173,40 +180,43 @@ jest-playwright is added to the jest configuration as a preset which makes all t
 
 ### Sample Jest Code
 
-```js
-module.exports = {
- browsers: [process.env.BROWSER || "chromium"],
- devices: ["iPhone 6", "Pixel 2"],
-};
-```
-
-Below are some great and useful functions that come with jest-playwright;
-
-Reset helper functions. These functions come in handy when you want to reset the browser or page for various reasons such as deleting cookies. It exposes functions like;
-
-- `resetPage()`
-- `resetContext()`
-- `resetBrowser()`
-
-Example usage of reset current browser
+The code snippet below navigates to wikipedia.org in Chrome and checks if the correct title is being displayed.
 
 ```js
-beforeEach(async () => {
- await jestPlaywright.resetBrowser();
-});
+const { chromium } = require("playwright");
+
+describe('Wikipedia home page', async() => {
+  let browser, page;
+  browser = await chromium.launch();
+  page = await browser.newPage();
+
+  it('should display correct page title', async() => {
+  await page.goto("https://www.wikipedia.org/");
+
+  const title = await page.title();
+  await expect(title).toBe("The Free Encyclopedia");
+
+  await browser.close();
+})
 ```
 
-Debug helper functions. This help in debugging test incase there are test failure. It uses the `jestPlaywrightDebug()`
+### Playwright Advantages
 
-Example usage of Debug
+Playwright offers some great pros such as;
 
-```js
-test.jestPlaywrightDebug("failed", async ({ page }) => {
- await page.goto("https://www.wikipedia.org/");
- const title = await page.title();
- await expect(title).toBe("Nothing");
-});
-```
+- It's simple to set up.
+- Stable features.
+- Ability to install Chrome, Firefox or WebKit (Safari) automatically.
+- Bidirectional (events) – automating things like console logs is easy.
+- Maintained by [Microsoft people](https://blog.logrocket.com/playwright-vs-puppeteer/) with experience maintaining Puppeteer.
+
+### Playwright Disadvantages
+
+Playwright also presents some cons such as;
+
+- It is very new so the APIs are evolving.
+- Has no support for IE11 or non-browser platforms.
+- Documentations and community are not as good as the other framework yet.
 
 For more of these gems that come with jest-playwright, please visit the [Github Repo](https://github.com/playwright-community/jest-playwright).
 
@@ -241,26 +251,6 @@ The above visualized chart represents data that was collected by running MediaWi
 The tests were run 40 times in both frameworks to ascertain stability and reliability. No flakiness and failures were encountered during the tests run. As shown above, there is consistency in time when the tests were run in WebdriverIO and Playwright.
 
 The above chart further shows that Playwright is much faster than WebdriverIO in terms of speed.
-
-### Why Adapt Playwright
-
-#### Playwright Advantages
-
-Playwright offers some great pros such as;
-
-- It's simple to set up.
-- Stable features.
-- Ability to install Chrome, Firefox or WebKit (Safari) automatically.
-- Bidirectional (events) – automating things like console logs is easy.
-- Maintained by [Microsoft people](https://blog.logrocket.com/playwright-vs-puppeteer/) with experience maintaining Puppeteer.
-
-#### Playwright Disadvantages
-
-Playwright also presents some cons such as;
-
-- It is very new so the APIs are evolving.
-- Has no support for IE11 or non-browser platforms.
-- Documentations and community are not as good as the other framework yet.
 
 ### Migrating From WebdriverIO
 
