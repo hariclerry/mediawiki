@@ -278,7 +278,7 @@ From the various evaluations done with Playwright, there seems to be great poten
 
 - WebdriverIO is [JavaScript](https://en.wikipedia.org/wiki/JavaScript) based and is built over [Node.js](https://en.wikipedia.org/wiki/Node.js) just like Playwright thus making it easier for developers to stick to the same programming language in the face of a potential switch to Playwright.
 - The MediaWiki Core test implementation follows the Page Object Pattern, this would make it easy to write Playwright tests using the existing structure.
-- Playwright has a number of useful features that come with it, some of these features are missing in WebdriverIO thus making it a better option for a switch 
+- Playwright has a number of useful features that come with it, some of these features are missing in WebdriverIO thus making it a better option for a switch.
 - With the release of WebdriverIO v7, the support for Node v10 has been dropped. This will require most MediaWiki projects to upgrade the Node version from Node v10. Migrating to Playwright would be a great alternative in the short run.
 
 #### Disadvantages
