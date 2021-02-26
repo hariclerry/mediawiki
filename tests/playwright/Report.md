@@ -249,10 +249,10 @@ The below table is a comparison between Playwright and WebdriverIO in terms of;
 
 |Key Factors|Playwright|WebdriverIO|
 |:----------|:----------|:----------|
-|Performance|- Fast</br> - Stable</br> - Reliable|- A bit slower</br>  - Stable</br>  - Reliable|
-|Developer Experience|- Simple to setup</br>  -Javascript-based|-Requires additional set up browser driver like ChromeDriver</br>  -Javascript-based |
-|Documentation|- Because it's a new framework, it has a fairly good documentation with some great example projects</br> |- Has great documentation with detailed instructions with up to date information and example projects|
-|Community|- Has smaller community and is maintained by few people|- Has a bigger community and is well maintained by many people|
+|Performance|- Fast</br> - Stable</br> - Reliable|- Slower</br>  - Stable</br>  - Reliable|
+|Developer Experience|- Simple setup</br>  -Javascript-based|-Additional browser driver set up (v5 and below)</br> - No additional browser driver set up (v6+)</br>  -Javascript-based |
+|Documentation|- Fairly good documentation</br> - Great example projects</br> |- Great documentation</br> - Detailed instructions</br> - Good example projects|
+|Community|- New framework</br> - Smaller community</br> - Few maintainers|- Larger community</br> - Bigger maintainers|
 
 ### Statistics
 
