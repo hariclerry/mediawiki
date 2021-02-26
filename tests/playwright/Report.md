@@ -52,10 +52,10 @@ Playwright maybe the new kid on the block but it's gaining quite a trajectory am
 
 The Playwright evaluation is a result of a need for to check if WebdriverIO is still a good test automation framework compared to some of the best non-Selenium modern test automation frameworks. MediaWiki is implemented in a large number of repositories. So, in order to ensure good code practices across all these repositories, an extensive amount of testing is performed. One of the tests performed is an end-to-end test. WebdriverIO is the current browser automation framework being used for implementing the end-to-end tests. However, with the recent increase in awareness about end-to-end testing, a number of equally competitive non-Selenium solutions have been introduced and one of them is Playwright.
 
-At the time of choosing which automation framework to use in the implementation of the test automation, extensive research was done and an [evaluation of WebdriverIO](https://filipin.eu/selenium-javascript) was carried out by Željko Filipin, who is a Senior Engineer in Test at Wikimedia Foundation and also one of my mentors. To verify if WebdriverIO is still a great testing framework for MediaWiki, a number of modern and non-selenium automation frameworks have been evaluated against WebdriverIO. These evaluations were done by Soham Parekh who was Google Summer of Code 2020 intern and is also one of my mentors and [Sim T.H. Tran](https://www.mediawiki.org/wiki/User:SimTran). These evaluations can be found in the links below;
+At the time of choosing which automation framework to use in the implementation of the test automation, extensive research was done and an [evaluation of WebdriverIO](https://filipin.eu/selenium-javascript) was carried out by Željko Filipin, who is a Senior Engineer in Test at Wikimedia Foundation and also one of my mentors. To verify if WebdriverIO is still a great testing framework for MediaWiki, a number of modern and non-Selenium automation frameworks have been evaluated against WebdriverIO. These evaluations were done by Soham Parekh who was Google Summer of Code 2020 intern and is also one of my mentors and [Sim T.H. Tran](https://www.mediawiki.org/wiki/User:SimTran). These evaluations can be found in the links below;
 
-- [Cypress Evaluation](https://www.mediawiki.org/wiki/User:SimTran/Cypress_vs_WebdriverIO:_What_are_the_differences%3F) by Sim T.H. Tran
-- [Puppeteer Evaluation](https://www.sohamp.dev/blog/2020-08-24-wmf-gsoc2020/) by Soham Parekh
+- [Cypress Evaluation](https://www.mediawiki.org/wiki/User:SimTran/Cypress_vs_WebdriverIO:_What_are_the_differences%3F) by Sim T.H. Tran.
+- [Puppeteer Evaluation](https://www.sohamp.dev/blog/2020-08-24-wmf-gsoc2020/) by Soham Parekh.
 
 So, this brings us to the current framework being evaluated against WebdriverIO, which is Playwright. The evaluations progress involved the following steps;
 
@@ -136,7 +136,7 @@ WebdriverIO offers some great pros such as;
 - Stable features.
 - Synchronous implementation of asynchronous browser commands.
 - Excellent API documentation.
-- Support for Modern Web and Mobile Frameworks.
+- Support for modern web and mobile frameworks.
 
 ### WebdriverIO Disadvantages
 
@@ -274,14 +274,14 @@ The above chart further shows that Playwright is much faster than WebdriverIO in
 
 From the various evaluations done with Playwright, there seems to be great potential replacement in the future. Playwright seem to stand out in terms of both speed and stability. However, the question being asked is, is it worth migrating from WebdriverIO to another test automation framework? Let’s look at the advantages and disadvantages of a potential migration.
 
-#### Advantages
+### Advantages
 
 - WebdriverIO is [JavaScript](https://en.wikipedia.org/wiki/JavaScript) based and is built over [Node.js](https://en.wikipedia.org/wiki/Node.js) just like Playwright thus making it easier for developers to stick to the same programming language in the face of a potential switch to Playwright.
 - The MediaWiki Core test implementation follows the Page Object Pattern, this would make it easy to write Playwright tests using the existing structure.
 - Playwright has a number of useful features that come with it, some of these features are missing in WebdriverIO thus making it a better option for a switch.
 - With the release of WebdriverIO v7, the support for Node v10 has been dropped. This will require most MediaWiki projects to upgrade the Node version from Node v10. Migrating to Playwright would be a great alternative in the short run.
 
-#### Disadvantages
+### Disadvantages
 
 - Investment in WebdriverIO tool. Most tests are already written in WebdriverIO. About 30 MediaWiki repositories use it, so migrating from it to another tool would require a great deal of time and manpower.
 - Update of documentation. Most documentation is already written and has references to WebdriverIO. Updating the documentation would require some time.
