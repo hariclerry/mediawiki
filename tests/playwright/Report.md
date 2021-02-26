@@ -10,6 +10,8 @@
   - [Sample WebdriverIO Code](#sample-webdriverio-code)
   - [Mocha](#mocha)
   - [Sample Mocha Code](#sample-mocha-code)
+  - [WebdriverIO Advantages](#webdriverio-advantages)
+  - [WebdriverIO Disadvantages](#webdriverio-disadvantages)
 
 - [Playwright](#playwright)
   - [Sample Playwright Code](#sample-playwright-code)
@@ -79,7 +81,7 @@ WebdriverIO provides the ability and options to run commands in both asynchronou
 The code snippet below navigates to wikipedia.org in Chrome and checks if the correct title is being displayed.
 
 ```js
-const assert = require('assert')
+const assert = require('assert');
 const { remote } = require('webdriverio');
 
 (async () => {
@@ -88,10 +90,10 @@ const { remote } = require('webdriverio');
             browserName: 'chrome'
         }
   });
-  await browser.url('https://www.wikipedia.org/')
+  await browser.url('https://www.wikipedia.org/');
 
   const title = await browser.getTitle();
-  assert(title === "The Free Encyclopedia");
+  assert(title === 'The Free Encyclopedia');
 
   await browser.deleteSession();
 })();
@@ -123,9 +125,25 @@ describe('Wikipedia home page', async() => {
     expect(browser).toHaveTitle('The Free Encyclopedia');
     
     await browser.deleteSession();
-  })
+  });
 })();
 ```
+
+### WebdriverIO Advantages
+
+WebdriverIO offers some great pros such as;
+
+- Stable features.
+- Synchronous implementation of asynchronous browser commands.
+- Excellent API documentation.
+- Support for Modern Web and Mobile Frameworks.
+
+### WebdriverIO Disadvantages
+
+WebdriverIO also presents some cons such as;
+
+- Additional effort to set up browser driver with selenium-standalone or ChromeDriver.
+- Must run with WDIO to debug.
 
 ## Playwright
 
@@ -152,17 +170,17 @@ Below are some of the benefits I have experienced and seen while using Playwrigh
 The code snippet below navigates to wikipedia.org in Chrome and checks if the correct title is being displayed.
 
 ```js
-const assert = require("assert");
-const { chromium } = require("playwright");
+const assert = require('assert');
+const { chromium } = require('playwright');
 
 (async () => {
   let browser, page;
   browser = await chromium.launch();
   page = await browser.newPage();
-  await page.goto("https://www.wikipedia.org/");
+  await page.goto('https://www.wikipedia.org/');
 
-  const title = await page.innerText(".localized-slogan");
-  assert(title === "The Free Encyclopedia");
+  const title = await page.innerText('.localized-slogan');
+  assert(title === 'The Free Encyclopedia');
 
   await browser.close();
 })();
@@ -183,7 +201,7 @@ jest-playwright is added to the jest configuration as a preset which makes all t
 The code snippet below navigates to wikipedia.org in Chrome and checks if the correct title is being displayed.
 
 ```js
-const { chromium } = require("playwright");
+const { chromium } = require('playwright');
 
 describe('Wikipedia home page', async() => {
   let browser, page;
@@ -191,10 +209,10 @@ describe('Wikipedia home page', async() => {
   page = await browser.newPage();
 
   it('should display correct page title', async() => {
-  await page.goto("https://www.wikipedia.org/");
+  await page.goto('https://www.wikipedia.org/');
 
   const title = await page.title();
-  await expect(title).toBe("The Free Encyclopedia");
+  await expect(title).toBe('The Free Encyclopedia');
 
   await browser.close();
 })
@@ -254,16 +272,20 @@ The above chart further shows that Playwright is much faster than WebdriverIO in
 
 ### Migrating From WebdriverIO
 
-From the various evaluations done against WebdriverIO, there seems to be great potential replacement in the future. Puppeteer and Playwright seem to stand out in terms of both speed and stability. However, the question being asked is, is it worth migrating from WebdriverIO to another test automation framework? Let’s look at the advantages and disadvantages of a potential migration.
+From the various evaluations done with Playwright, there seems to be great potential replacement in the future. Playwright seem to stand out in terms of both speed and stability. However, the question being asked is, is it worth migrating from WebdriverIO to another test automation framework? Let’s look at the advantages and disadvantages of a potential migration.
 
 #### Advantages
 
-- WebdriverIO is [JavaScript](https://en.wikipedia.org/wiki/JavaScript) based and is built over [Node.js](https://en.wikipedia.org/wiki/Node.js) just like Puppeteer and Playwright thus it will be easier for developers since there would be no differences in programming language.
+- WebdriverIO is [JavaScript](https://en.wikipedia.org/wiki/JavaScript) based and is built over [Node.js](https://en.wikipedia.org/wiki/Node.js) just like Playwright thus making it easier for developers to stick to the same programming language in the face of a potential switch to Playwright.
+- The MediaWiki Core test implementation follows the Page Object Pattern, this would make it easy to write Playwright tests using the existing structure.
+- Playwright has a number of useful features that come with it, some of these features are missing in WebdriverIO thus making it a better option for a switch 
+- With the release of WebdriverIO v7, the support for Node v10 has been dropped. This will require most MediaWiki projects to upgrade the Node version from Node v10. Migrating to Playwright would be a great alternative in the short run.
 
 #### Disadvantages
 
 - Investment in WebdriverIO tool. Most tests are already written in WebdriverIO. About 30 MediaWiki repositories use it, so migrating from it to another tool would require a great deal of time and manpower.
 - Update of documentation. Most documentation is already written and has references to WebdriverIO. Updating the documentation would require some time.
+- WebdriverIO incorporates Puppeteer as second automation driver tool allowing the extra features which pretty much make up for some of the features that Playwright has, hence no much point in switching to Playwright.
 
 ## What Next
 
