@@ -75,7 +75,6 @@ WebdriverIO provides the ability and options to run commands in both asynchronou
 The code snippet below navigates to wikipedia.org in Chrome and checks if the correct title is being displayed.
 
 ```js
-const assert = require('assert');
 const { remote } = require('webdriverio');
 
 (async () => {
@@ -87,7 +86,7 @@ const { remote } = require('webdriverio');
   await browser.url('https://www.wikipedia.org/');
 
   const title = await browser.getTitle();
-  assert(title === 'The Free Encyclopedia');
+  expect(title).toHaveTitle('The Free Encyclopedia')
 
   await browser.deleteSession();
 })();
@@ -155,8 +154,8 @@ While working with Playwright for the past few months, it has come across as eas
 The code snippet below navigates to wikipedia.org in Chrome and checks if the correct title is being displayed.
 
 ```js
-const assert = require('assert');
 const { chromium } = require('playwright');
+const expect = require('expect-playwright');
 
 (async () => {
   let browser, page;
@@ -164,8 +163,8 @@ const { chromium } = require('playwright');
   page = await browser.newPage();
   await page.goto('https://www.wikipedia.org/');
 
-  const title = await page.innerText('.localized-slogan');
-  assert(title === 'The Free Encyclopedia');
+  const title = await page.$('.localized-slogan');
+  await expect(title).toEqualText('The Free Encyclopedia')
 
   await browser.close();
 })();
@@ -281,7 +280,7 @@ From the various evaluations done with Playwright, there seems to be great poten
 
 ## Summary
 
-Statistics show that Playwright is a better alternative tool over WebdriverIO in terms of speed. However, WebdriverIO seems to be a great tool given that it keeps evolving, new and modern features are being added to it and the community is still vibrant and supportive. As of the time of the evaluation, there are no plans to switch to a different test automation framework but this could change in the future.
+As of the above statistics and comparison, Playwright is a better alternative tool over WebdriverIO in terms of speed. However, WebdriverIO is a great tool given that it keeps evolving, new and modern features are being added to it and the community is still vibrant and supportive. With the recent release of [WebdriverIO v7](https://webdriver.io/blog/2021/02/09/webdriverio-v7-released/) which has some great feature update, and the fact that WebdriverIO incorporates a framework like Puppeteer as second automation driver tool makes WebdriverIO a powerful test automation framework. There is also a potential integration with Playwright in the near future. As of the time of the evaluation, there are no plans to switch to a different test automation framework but this could change in the future.
 
 ## Acknowledgement
 
