@@ -66,13 +66,7 @@ So, this brings us to the current framework being evaluated against WebdriverIO,
 
 ## WebdriverIO
 
-WebdriverIO is a test automation framework that allows you to run tests based on the WebDriver protocol and Appium automation technology. WebdriverIO is known to be;
-
-- Extendable: Adding helper functions, or more complicated sets and combinations of existing commands is simple and really useful.
-- Compatible: WebdriverIO can be run on the WebDriver Protocol for true cross-browser testing as well as Chrome DevTools Protocol for Chromium-based automation using Puppeteer.
-- Feature Rich: The huge variety of community plugins allows you to easily integrate and extend your setup to fulfill your requirements.
-
-The above points are just a few of WebdriverIO capability. To explore more WebdriverIO capabilities, you can check out the WebdriverIO and [MediaWiki documentation](https://www.mediawiki.org/wiki/Selenium).
+WebdriverIO is a test automation framework that allows you to run tests based on the WebDriver protocol and Appium automation technology.
 
 WebdriverIO provides the ability and options to run commands in both asynchronous and synchronous operations. For asynchronous operations, you can use the JavaScript usual async/await, however for synchronous, it can be done through [node-fibers](https://www.npmjs.com/package/fibers). Both of these options have their own benefits and issues which can be found on the [WebdriverIO](https://webdriver.io/docs/sync-vs-async) website.
 
@@ -133,6 +127,9 @@ describe('Wikipedia home page', async() => {
 
 WebdriverIO offers some great pros such as;
 
+- Extendable, adding helper functions, or more complicated sets and combinations of existing commands is simple and really useful.
+- It's Compatibility nature enables it to run on the WebDriver Protocol for true cross-browser testing as well as Chrome DevTools Protocol for Chromium-based automation using Puppeteer.
+- Rich feature with huge variety of community plugins that allows you to easily integrate and extend your setup to fulfill your requirements.
 - Stable features.
 - Synchronous implementation of asynchronous browser commands.
 - Excellent API documentation.
@@ -142,28 +139,16 @@ WebdriverIO offers some great pros such as;
 
 WebdriverIO also presents some cons such as;
 
-- Additional effort to set up browser driver with selenium-standalone or ChromeDriver.
-- Must run with WDIO to debug.
+- Additional effort to set up browser driver with selenium-standalone or ChromeDriver especially in v5 and below.
+- Much slower compared to frameworks like Playwright and Puppeteer.
+
+To explore more WebdriverIO capabilities, you can check out the WebdriverIO and [MediaWiki documentation](https://www.mediawiki.org/wiki/Selenium).
 
 ## Playwright
 
-Playwright is a Node.js library to automate Chromium, Firefox, and WebKit with a single API. Playwright is known for the following capability;
+Playwright is a Node.js library to automate Chromium, Firefox, and WebKit with a single API.
 
-- Test across all modern browsers: Single API to automate Chromium, Firefox and WebKit.
-- Use in your preferred language: Use the Playwright API in JavaScript & TypeScript, Python, C# and Java.
-- Automate without trade-offs: Capable automation for single-page apps that rely on the modern web platform.
-
-The above points are just a few capabilities. To explore more on Playwright capability, you can check out the Playwright documentation and my [MediaWiki Core fork](https://github.com/hariclerry/mediawiki/tree/master/tests/playwright).
-
-While working with Playwright for the past two months, it has come across as easy to install and setup. The package takes care of installing all the browsers (Chromium, Firefox, and WebKit). Capturing screenshots is an out-of-the-box experience. However, video recording requires separate installation of [playwright-video and ffmpeg](https://playwright.tech/blog/record-your-browser-tests-with-playwright) but they all blend in with Playwright seamlessly.
-
-Below are some of the benefits I have experienced and seen while using Playwright;
-
-- Console debug option which is very useful in an event when tests are failing with no clear error messages.
-- Scenarios that span multiple pages, domains, and iframes.
-- Auto-wait for elements to be ready before executing actions (like click, fill).
-- Intercept network activity for stubbing and mocking network requests.
-- Seamless integration with Jest.
+While working with Playwright for the past few months, it has come across as easy to install and setup. The package takes care of installing all the browsers (Chromium, Firefox, and WebKit). Capturing screenshots is an out-of-the-box experience. However, video recording requires separate installation of [playwright-video and ffmpeg](https://playwright.tech/blog/record-your-browser-tests-with-playwright) but they all blend in with Playwright seamlessly.
 
 ### Sample Playwright Code
 
@@ -222,11 +207,14 @@ describe('Wikipedia home page', async() => {
 
 Playwright offers some great pros such as;
 
+- Test across all modern browsers with single API to automate Chromium, Firefox and WebKit.
+- The API can be used in JavaScript & TypeScript, Python, C# and Java.
 - It's simple to set up.
 - Stable features.
-- Ability to install Chrome, Firefox or WebKit (Safari) automatically.
 - Bidirectional (events) – automating things like console logs is easy.
-- Maintained by [Microsoft people](https://blog.logrocket.com/playwright-vs-puppeteer/) with experience maintaining Puppeteer.
+- Auto-wait for elements to be ready before executing actions (like click, fill).
+- Intercept network activity for stubbing and mocking network requests.
+- Seamless integration with Jest.
 
 ### Playwright Disadvantages
 
@@ -236,7 +224,7 @@ Playwright also presents some cons such as;
 - Has no support for IE11 or non-browser platforms.
 - Documentations and community are not as good as the other framework yet.
 
-For more of these gems that come with jest-playwright, please visit the [Github Repo](https://github.com/playwright-community/jest-playwright).
+To explore more on Playwright capability, you can check out the Playwright documentation and my [MediaWiki Core fork](https://github.com/hariclerry/mediawiki/tree/master/tests/playwright).
 
 ## Playwright Vs WebdriverIO
 
@@ -252,7 +240,7 @@ The below table is a comparison between Playwright and WebdriverIO in terms of;
 |Performance|- Fast</br> - Stable</br> - Reliable|- Slower</br>  - Stable</br>  - Reliable|
 |Developer Experience|- Simple setup</br>  -Javascript-based|-Additional browser driver set up (v5 and below)</br> - No additional browser driver set up (v6+)</br>  -Javascript-based |
 |Documentation|- Fairly good documentation</br> - Great example projects</br> |- Great documentation</br> - Detailed instructions</br> - Good example projects|
-|Community|- New framework</br> - Smaller community</br> - Few maintainers|- Larger community</br> - Bigger maintainers|
+|Community|- New framework</br> - Smaller community</br> - Few maintainers|- Larger community</br> - Many maintainers|
 
 ### Statistics
 
@@ -278,14 +266,13 @@ From the various evaluations done with Playwright, there seems to be great poten
 
 - WebdriverIO is [JavaScript](https://en.wikipedia.org/wiki/JavaScript) based and is built over [Node.js](https://en.wikipedia.org/wiki/Node.js) just like Playwright thus making it easier for developers to stick to the same programming language in the face of a potential switch to Playwright.
 - The MediaWiki Core test implementation follows the Page Object Pattern, this would make it easy to write Playwright tests using the existing structure.
-- Playwright has a number of useful features that come with it, some of these features are missing in WebdriverIO thus making it a better option for a switch.
-- With the release of WebdriverIO v7, the support for Node v10 has been dropped. This will require most MediaWiki projects to upgrade the Node version from Node v10. Migrating to Playwright would be a great alternative in the short run.
+- Playwright has a number of useful features that come with it like the reset helper functions and single API to automate Chromium, Firefox and WebKit, among others. Some of these features are missing in WebdriverIO thus making Playwright a better option for a switch.
 
 ### Disadvantages
 
 - Investment in WebdriverIO tool. Most tests are already written in WebdriverIO. About 30 MediaWiki repositories use it, so migrating from it to another tool would require a great deal of time and manpower.
 - Update of documentation. Most documentation is already written and has references to WebdriverIO. Updating the documentation would require some time.
-- WebdriverIO incorporates Puppeteer as second automation driver tool allowing the extra features which pretty much make up for some of the features that Playwright has, hence no much point in switching to Playwright.
+- WebdriverIO incorporates Puppeteer as second automation driver tool allowing for the extra features which pretty much make up for some of the features that Playwright has, hence no much point in switching to Playwright.
 
 ## What Next
 
