@@ -116,7 +116,7 @@ describe('Wikipedia home page', async() => {
     await browser.url('https://www.wikipedia.org/');
 
     expect(browser).toHaveTitle('The Free Encyclopedia');
-    
+
     await browser.deleteSession();
   });
 })();
@@ -127,7 +127,7 @@ describe('Wikipedia home page', async() => {
 WebdriverIO offers some great pros such as;
 
 - Extendable, adding helper functions, or more complicated sets and combinations of existing commands is simple and really useful.
-- It's Compatibility nature enables it to run on the WebDriver Protocol for true cross-browser testing as well as Chrome DevTools Protocol for Chromium-based automation using Puppeteer.
+- It's compatibility nature enables it to run on the WebDriver Protocol for true cross-browser testing as well as Chrome DevTools Protocol for Chromium-based automation using Puppeteer.
 - Rich feature with huge variety of community plugins that allows you to easily integrate and extend your setup to fulfill your requirements.
 - Stable features.
 - Synchronous implementation of asynchronous browser commands.
@@ -193,13 +193,14 @@ describe('Wikipedia home page', async() => {
   page = await browser.newPage();
 
   it('should display correct page title', async() => {
-  await page.goto('https://www.wikipedia.org/');
+    await page.goto('https://www.wikipedia.org/');
 
-  const title = await page.title();
-  await expect(title).toBe('The Free Encyclopedia');
+    const title = await page.title();
+    await expect(title).toBe('The Free Encyclopedia');
 
-  await browser.close();
-})
+    await browser.close();
+  });
+})();
 ```
 
 ### Playwright Advantages
@@ -227,12 +228,7 @@ To explore more on Playwright capability, you can check out the Playwright docum
 
 ## Playwright Vs WebdriverIO
 
-The below table is a comparison between Playwright and WebdriverIO in terms of;
-
-- Performance
-- Developer Experience
-- Documentation
-- Ecosystem/Community
+The below table is a comparison between Playwright and WebdriverIO.
 
 |Key Factors|Playwright|WebdriverIO|
 |:----------|:----------|:----------|
