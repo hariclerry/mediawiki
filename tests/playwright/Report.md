@@ -86,7 +86,7 @@ const { remote } = require('webdriverio');
   await browser.url('https://www.wikipedia.org/');
 
   const title = await browser.getTitle();
-  expect(title).toHaveTitle('The Free Encyclopedia')
+  expect(title).toHaveTitle('The Free Encyclopedia');
 
   await browser.deleteSession();
 })();
@@ -164,7 +164,7 @@ const expect = require('expect-playwright');
   await page.goto('https://www.wikipedia.org/');
 
   const title = await page.$('.localized-slogan');
-  await expect(title).toEqualText('The Free Encyclopedia')
+  await expect(title).toEqualText('The Free Encyclopedia');
 
   await browser.close();
 })();
