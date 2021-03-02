@@ -1,0 +1,18 @@
+{
+	"root": true,
+	"parser": "babel-eslint",
+	"parserOptions": {
+		"ecmaVersion": 8
+	},
+	"extends": ["../../.eslintrc.json", "plugin:jest/recommended"],
+	"plugins": ["jest", "jasmine"],
+	"env": {
+		"node": true,
+		"browser": true,
+		"jest/globals": true,
+		"jasmine": true
+	},
+	"rules": {
+		"jest/no-jasmine-globals": 0
+	}
+}

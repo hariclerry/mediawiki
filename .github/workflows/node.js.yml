@@ -38,20 +38,11 @@ jobs:
               run: |
                   npm ci
                   npm run lint
-            - name: Run playwright tests
-              run: |
-                  npm run playwright:silent
+            - name: Run puppeteer tests
+              run: npm run puppeteer:silent
             - uses: actions/upload-artifact@v2
-              name: Upload playwright artifacts
+              name: Upload puppeteer artifacts
               with:
-                  name: playwright-artifact
-                  path: tests/playwright/log
-                  retention-days: 2
-            - name: Run webdriver.io tests
-              run: npm run selenium-test
-            - uses: actions/upload-artifact@v2
-              name: Upload selenium artifacts
-              with:
-                  name: selenium-artifact
-                  path: tests/selenium/log
+                  name: puppeteer-artifact
+                  path: tests/puppeteer/log
                   retention-days: 2
